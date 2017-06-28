@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/start_LL"
+    android:layout_width="360dp"
+    android:layout_height="640dp"
+    android:background="@mipmap/strart_bg"
+    android:orientation="vertical" >
+
+</RelativeLayout>

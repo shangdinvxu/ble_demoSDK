@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+         >
+
+        <TextView
+            android:id="@+id/activity_sport_data_detail_sleepSumView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/normal_title_height"
+            android:layout_gravity="center"
+            android:text="透传测试"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
+    </FrameLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="20dip" >
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLines="5"
+            android:hint="请在此输入指令" >
+        </EditText>
+
+        <ImageButton
+            android:id="@+id/history_dropdown_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf ="@id/editText"
+            android:background="@mipmap/login_input_arrow"
+            android:contentDescription="@string/app_name" />
+        
+        
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="发送" >
+        </Button>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="120dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:layout_marginRight="40dip"
+            android:layout_gravity="center"
+            android:text="清空" >
+        </Button>
+        
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:layout_gravity="center"
+             android:layout_marginLeft="40dip"
+            android:text="发送(不需要&apos;,&apos;)" >
+        </Button>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="20dip"
+        android:scrollbars="none" >
+
+        <TextView
+            android:id="@+id/Log"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="20dip"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="20dip"
+            android:hint="此处为指令Log,每个byte命令用,隔开" />
+    </ScrollView>
+
+</LinearLayout>

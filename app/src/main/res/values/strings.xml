@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, BlueActivity!</string>
+    <string name="app_name">连爱手表蓝牙测试</string>
+
+
+    <string name="close_ble">断开蓝牙</string>
+    <string name="connect_success">连接成功！</string>
+    <string name="ble_disconnect">断开连接！</string>
+    <string name="ble_not_connect">请连接蓝牙</string>
+    <string name="no_permission">No Permission</string>
+
+
+    <drawable name="white">#ffffff</drawable>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_lingnantong">TestActivity</string>
+    <string name="title_activity_draw">DrawActivity</string>
+    <string name="portal_main_isbounding">綁定中..</string>
+    <string name="bound_scan_sqr">取消綁定(剩餘{0}秒)</string>
+</resources>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:paddingBottom="@dimen/normal_title_padding"
+        android:paddingTop="@dimen/normal_title_padding"
+        >
+    <FrameLayout android:layout_width="fill_parent"
+                               android:layout_height="wrap_content"
+                               >
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="@dimen/normal_title_height"
+            android:layout_height="@dimen/normal_title_height"
+            android:background="@mipmap/widget_title_btn_back_normal"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="12dp"
+            />
+
+        <TextView
+            android:id="@+id/activity_sport_data_detail_sleepSumView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:text="功能测试" />
+        
+         <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:orientation="vertical" >
+
+            
+        </LinearLayout>
+        
+    </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:hint="请输入6位英文或者数字"
+        android:layout_marginTop="20dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="确定" />
+
+    <TextView
+        android:id="@+id/yue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/get_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="获取余额"
+         />
+
+</LinearLayout>

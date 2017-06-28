@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.ble.main.testview.LingnantongActivity"
+    tools:showIn="@layout/activity_lingnantong">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/connect"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="连接蓝牙设备"/>
+
+        <Button
+            android:id="@+id/ble_state"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="获取连接状态"/>
+
+        <Button
+            android:id="@+id/send_data"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="传送数据"/>
+
+        <Button
+            android:id="@+id/poweron"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="手环上电"/>
+
+        <Button
+            android:id="@+id/poweroff"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="手环下电"/>
+
+        <Button
+            android:id="@+id/disconnect"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="断开连接"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

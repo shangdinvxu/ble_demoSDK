@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.ble.main.MainView">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="right"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="90dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dip">
+
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="连接状态："
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/status"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:text="--"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dip">
+
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/senddata"
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dip"
+                    android:text="数据透传测试" />
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/function_test"
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dip"
+                    android:text="功能测试" />
+
+                <Button
+                    android:id="@+id/test_lingnantong"
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dip"
+                    android:text="岭南通充值"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/view_btn"
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dip"
+                    android:text="获取固件版本界面"
+                    />
+
+                <Button
+                    android:id="@+id/scan"
+                    android:layout_width="150dip"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="查找设备" />
+            <Button
+                android:id="@+id/sync"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="同步数据" />
+            <Button
+                android:id="@+id/clock"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="设置闹钟" />
+            <Button
+                android:id="@+id/longSit"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="久坐" />
+            <Button
+                android:visibility="gone"
+                android:id="@+id/notifica"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="消息通知" />
+            <Button
+                android:visibility="gone"
+                android:id="@+id/power"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="电源管理" />
+
+            <Button
+                android:visibility="visible"
+                android:text="开卡"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/kaika" />
+            <Button
+                android:id="@+id/aid"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="aid" />
+            <Button
+                android:id="@+id/afteraid"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="afteraid" />
+            <Button
+                android:id="@+id/afteraid2"
+                android:layout_width="150dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="afteraid2" />
+
+            </LinearLayout>
+
+
+
+        <Button
+            android:visibility="gone"
+            android:text="运动数据"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/SportData" />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

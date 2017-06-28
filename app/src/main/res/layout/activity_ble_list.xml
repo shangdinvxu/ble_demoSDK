@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+
+
+        >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="@dimen/normal_title_height"
+            android:layout_height="@dimen/normal_title_height"
+            android:background="@mipmap/widget_title_btn_back_normal"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="12dp"
+            />
+
+        <TextView
+            android:id="@+id/activity_sport_data_detail_sleepSumView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:text="蓝牙设备列表" />
+
+
+
+           <Button
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:background="@null"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="12dp"
+            android:textSize="18sp"
+            android:text="刷新"
+            />
+
+
+    </FrameLayout>
+    </android.support.design.widget.AppBarLayout>
+    <ListView android:layout_height="fill_parent"
+                         android:layout_width="fill_parent"
+                         android:dividerHeight="15dp"
+                         android:layout_marginTop="15dp"
+                         android:divider="@android:color/transparent"
+                         android:id="@+id/ble_list">
+        
+    </ListView>
+
+</LinearLayout>
