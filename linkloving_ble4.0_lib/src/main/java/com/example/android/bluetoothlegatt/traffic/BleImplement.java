@@ -1,5 +1,6 @@
 package com.example.android.bluetoothlegatt.traffic;
 
+import android.app.Activity;
 import android.content.Context;
 
 import com.example.android.bluetoothlegatt.BLEHandler;
@@ -13,83 +14,62 @@ import com.example.android.bluetoothlegatt.proltrol.LPException;
 import com.example.android.bluetoothlegatt.proltrol.LepaoProtocalImpl;
 import com.example.android.bluetoothlegatt.proltrol.dto.LPDeviceInfo;
 
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.RunnableFuture;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * Created by Daniel.Xu on 2017/5/19.
  */
 
-public class BleImplement implements CtticReader {
-    private static  final String  apiVersion = "1.0.0" ;
-    private final BLEProvider provider;
-    private Context context ;
+public class BleImplement implements CtticReader{
 
-    public BleImplement (Context context, final BleListener bleListener ){
+    private static  final String  apiVersion = "1.0.0" ;
+    public final BLEProvider provider;
+    private Context context ;
+    private ConnectCallback connectCallback;
+
+    public BleImplement (Context context ){
         this.context = context ;
         provider = new BLEProvider(context);
-        provider.setProviderHandler(new BLEHandler(context) {
-            @Override
-            protected BLEProvider getProvider() {
-                return provider;
+        provider.setBleProviderObserver(new BLEProviderObserverAdapterImpl());
+
+    }
+
+    private class BLEProviderObserverAdapterImpl extends BLEHandler.BLEProviderObserverAdapter {
+
+        @Override
+        protected Activity getActivity() {
+            return (Activity)context;
+        }
+
+        @Override
+        public void updateFor_handleConnectSuccessMsg() {
+            super.updateFor_handleConnectSuccessMsg();
+            if (connectCallback!=null){
+                connectCallback.setConnectStatus(true);
             }
+        }
 
-            @Override
-            protected void handleConnectSuccessMsg() {
-                super.handleConnectSuccessMsg();
-                bleListener.connectSuccess();
+        @Override
+        public void updateFor_handleConnectLostMsg() {
+            super.updateFor_handleConnectLostMsg();
+            if (connectCallback!=null){
+                connectCallback.setConnectStatus(false);
             }
-
-            @Override
-            protected void handleConnectLostMsg() {
-                super.handleConnectLostMsg();
-                bleListener.connectLost();
-            }
-
-            @Override
-            protected void handleSendDataError() {
-                super.handleSendDataError();
-                bleListener.sendDataError();
-            }
-
-
-            @Override
-            protected void handleConnectFailedMsg() {
-                super.handleConnectFailedMsg();
-                bleListener.connectFailed();
-            }
-
-
-            @Override
-            protected void notifyFor0x13ExecSucess_D(LPDeviceInfo latestDeviceInfo) {
-                super.notifyFor0x13ExecSucess_D(latestDeviceInfo);
-                bleListener. notifyForDeviceInfo(latestDeviceInfo);
-            }
-
-
-            @Override
-            protected void notifyForDeviceUnboundSucess_D() {
-                super.notifyForDeviceUnboundSucess_D();
-                bleListener.deviceUnbundSuccess();
-            }
-
-            @Override
-            protected void notifyFor_response_ble_card(byte[] data) {
-                super.notifyFor_response_ble_card(data);
-                bleListener.responseBleCard(data);
-            }
-
-            @Override
-            protected void notifyForOpenSmc(Object obj) {
-                super.notifyForOpenSmc(obj);
-                bleListener.openCardSuccess();
-            }
-        });
+        }
     }
 
 
 
     @Override
-    public void open(String address, long timeOut, byte[] scanInfo) throws TimeoutException {
-        provider.connect_mac(address);
+    public byte[] open(String address, long timeOut, byte[] scanInfo) throws TimeoutException {
+       return provider.open(address,timeOut,scanInfo);
     }
 
     @Override
@@ -98,8 +78,13 @@ public class BleImplement implements CtticReader {
     }
 
     @Override
-    public void reopen(long timeOut) throws TimeoutException {
-        provider.connect();
+    public boolean reopen(long timeOut) throws TimeoutException {
+        return provider.reopen(timeOut);
+    }
+
+    @Override
+    public void registerConnectCallback(ConnectCallback callback) {
+        this.connectCallback =callback;
     }
 
 
@@ -109,36 +94,27 @@ public class BleImplement implements CtticReader {
     }
 
     @Override
-    public void powerOn(long timeOut) throws ConnectException, TimeoutException {
-        provider.openSmartCard(context);
+    public byte[] powerOn(long timeOut) throws ConnectException, TimeoutException {
+        return provider.powerOn(timeOut);
     }
 
     @Override
-    public void exchangeWithData(byte[] data, long timeOut) throws TimeoutException, ConnectException, TransportException {
-        provider.send_data2ble_card(context,data);
+    public byte[] exchangeWithData(byte[] data, long timeOut) throws TimeoutException, ConnectException, TransportException {
+       return provider.exchangeWithData(data,timeOut);
     }
 
-    public byte[] exchangeWithData_Sync(byte[] data, long timeOut) throws TimeoutException, ConnectException, TransportException {
-        LepaoProtocalImpl lepaoProtocal = new LepaoProtocalImpl();
-        byte[] senddata = null ;
-        try {
-            senddata = lepaoProtocal.senddata(data);
-        } catch (BLException e) {
-            e.printStackTrace();
-        } catch (LPException e) {
-            e.printStackTrace();
-        }
-        return senddata;
-    }
+
 
 
     @Override
-    public void powerOff() {
-        provider.closeSmartCard(context);
+    public boolean powerOff() {
+        return provider.powerOff();
     }
 
     @Override
     public void deleteDevice(String phoneNum) throws DeleteDeviceException {
         provider.unBoundDevice(context);
     }
+
+
 }

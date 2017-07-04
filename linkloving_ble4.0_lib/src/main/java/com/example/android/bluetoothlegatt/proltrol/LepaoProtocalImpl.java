@@ -1098,6 +1098,18 @@ public class LepaoProtocalImpl implements LepaoProtocol {
 		WatchResponse resp = this.sendData2BLE(req);
 		return resp.toOpenSmartCardOK(LepaoCommand.COMMAND_CONTROL_CARD, "openSmartCard");
 	}
+
+	public byte[] powerOn() throws LPException, BLException
+	{
+		WatchRequset req = new WatchRequset();
+		byte open =1;
+		req.appendByte((byte)(seq+=2)).appendByte(LepaoCommand.COMMAND_CONTROL_CARD).appendByte(open).makeCheckSum();
+		LPUtil.printData(req.getData()," openSmartCard");
+		WatchResponse resp = this.sendData2BLE(req);
+		return resp.getData();
+	}
+
+
 	
 	/*********************************城市AID*****************************/
 	public boolean AIDSmartCard(LPDeviceInfo deviceInfo) throws LPException, BLException

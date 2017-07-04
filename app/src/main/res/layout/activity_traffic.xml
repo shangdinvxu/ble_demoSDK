@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/connect"
+        android:text="connect"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <Button
+        android:text="disconnect"
+        android:id="@+id/disconnect"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <Button
+        android:text="reopen"
+        android:id="@+id/reopen"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <Button
+        android:text="power"
+        android:id="@+id/poweron"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <Button
+        android:id="@+id/poweroff"
+        android:text="poweroff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <Button
+        android:text="senddata"
+        android:id="@+id/senddata"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+
+</LinearLayout>

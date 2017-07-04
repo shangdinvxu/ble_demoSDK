@@ -386,7 +386,7 @@ public class DrawActivity extends AppCompatActivity {
             }
 
             Log.i(TAG,"开始连接");
-            provider.connect_mac(mac);
+//            provider.connect_mac(mac);
 
 
             String title = "连接中...";

@@ -23,7 +23,7 @@ public interface CtticReader {
      息，public void onLeScan(BluetoothDevice device,int rssi,byte[] scanRecord)函数
      的 scanRecord 参数。
      */
-    public void open(String address, long timeOut, byte[] scanInfo)
+    public byte[] open(String address, long timeOut, byte[] scanInfo)
             throws TimeoutException;
 
     /**
@@ -46,18 +46,18 @@ public interface CtticReader {
      异常
      TimeOutException: 上电超时异常
      */
-    public void reopen(long timeOut) throws TimeoutException;
+    public boolean reopen(long timeOut) throws TimeoutException;
 
 
-//    /***
-//     *
-//     该方法用于注册设备回调函数。
-//     参数
-//     callback: ConnectCallback 回调函数，由上层传入
-//     返回
-//     无
-//     */
-//    public void registerConnectCallback(ConnectCallback callback);
+    /***
+     *
+     该方法用于注册设备回调函数。
+     参数
+     callback: ConnectCallback 回调函数，由上层传入
+     返回
+     无
+     */
+    public void registerConnectCallback(ConnectCallback callback);
 
 
 //    /***
@@ -129,7 +129,7 @@ public interface CtticReader {
      ConnectException: 设备连接异常；
      TimeOutException，上电超时异常
      */
-    public void powerOn(long timeOut) throws ConnectException,
+    public byte[] powerOn(long timeOut) throws ConnectException,
             TimeoutException;
 
 
@@ -149,7 +149,7 @@ public interface CtticReader {
      ConnectException: 设备连接处理异常；
      TransportException: 命令执行异常；
      */
-    public void exchangeWithData(byte[] data, long timeOut) throws
+    public byte[] exchangeWithData(byte[] data, long timeOut) throws
             TimeoutException, ConnectException, TransportException;
 
 
@@ -161,7 +161,7 @@ public interface CtticReader {
      返回
      若下电成功，返回 true；否则返回失败
      */
-    public void powerOff();
+    public boolean powerOff();
 
 
     /**

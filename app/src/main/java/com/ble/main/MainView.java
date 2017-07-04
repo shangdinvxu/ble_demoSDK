@@ -158,7 +158,7 @@ public class MainView extends AppCompatActivity {
             }
 
             Log.i(TAG, "开始连接");
-            provider.connect_mac(mac);
+//            provider.connect_mac(mac);
 
             String title = "连接中...";
             String message = "正在连接Mac地址为：" + mac + "的设备！";

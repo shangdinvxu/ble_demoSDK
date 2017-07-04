@@ -25,6 +25,7 @@ import com.example.android.bluetoothlegatt.exception.BLESendTimeOutException;
 import com.example.android.bluetoothlegatt.exception.BLErrCode;
 import com.example.android.bluetoothlegatt.exception.BLException;
 import com.example.android.bluetoothlegatt.proltrol.LPUtil;
+import com.example.android.bluetoothlegatt.traffic.ConnectCallback;
 import com.example.android.bluetoothlegatt.utils.OwnLog;
 import com.example.android.bluetoothlegatt.wapper.CmdFinder.OnCmdFindedListener;
 
@@ -73,6 +74,8 @@ public class BLEWapper  implements BLEInterface {
 	private boolean BLESendTimeOutException=false;
 	private static int REC_CMD= 0;
 	private static boolean LENTHMORE20=false;
+
+	private boolean isConnected = false ;
 
 	private BluetoothAdapter.LeScanCallback mCallback;
 //	private ScanCallback mCallback_Lollipop;
@@ -131,6 +134,8 @@ public class BLEWapper  implements BLEInterface {
 	}
 
 
+
+
 	// Implements callback methods for GATT events that the app cares about. For
 	// example,
 	// connection change and services discovered.
@@ -139,19 +144,31 @@ public class BLEWapper  implements BLEInterface {
 		@Override
 		public void onConnectionStateChange(BluetoothGatt gatt, int status , int newState) {
 			   String intentAction;
-			  OwnLog.i(TAG, "onConnectionStateChange  status:"+status);
+			  OwnLog.e(TAG, "onConnectionStateChange  status:"+status);
 			   if(status==133 || status ==129){
 				    intentAction = ACTION_GATT_DISCONNECTED;
-					broadcastUpdate(intentAction, mContext);
+				   synchronized (BLEWapper.class) {
+					   isConnected=false;
+					   BLEWapper.class.notify();
+				   }
+				   broadcastUpdate(intentAction, mContext);
 				   if(mBluetoothGatt==null)
 					   return;
 			   }else{
 				   if (newState == BluetoothProfile.STATE_CONNECTED) {           //连接 2
 						intentAction = ACTION_GATT_CONNECTED;
+					   synchronized (BLEWapper.class) {
+						   isConnected=false;
+						   BLEWapper.class.notify();
+					   }
 						broadcastUpdate(intentAction, mContext);
 						Log.i(TAG, "mGattCallback Attempting to start service discovery:" + mBluetoothGatt.discoverServices());
 					} else if (newState == BluetoothProfile.STATE_DISCONNECTED) { //断开 0 
 						intentAction = ACTION_GATT_DISCONNECTED;
+					   synchronized (BLEWapper.class) {
+						   isConnected=false;
+						   BLEWapper.class.notify();
+					   }
 						Log.i(TAG, "mGattCallback Disconnected from GATT server.");
 						broadcastUpdate(intentAction, mContext);
 					}
@@ -411,10 +428,66 @@ public class BLEWapper  implements BLEInterface {
         // parameter to false.
         mBluetoothGatt = device.connectGatt(mContext, false, mGattCallback);
         mBluetoothDeviceAddress = address;
-        if(mBluetoothGatt != null)
-            return true;
-        else
-        	return false;
+		synchronized (BLEWapper.class) {
+			try {
+				OwnLog.e(TAG, "...................waiting.........................");
+				BLEWapper.class.wait(TIMEOUT);
+				OwnLog.e(TAG, "...................waiting执行完毕了.........................");
+			} catch (InterruptedException e) {
+				OwnLog.e(TAG, "................InterruptedException................");
+				e.printStackTrace();
+			}
+		}
+		return isConnected;
+//        if(mBluetoothGatt != null)
+//            return true;
+//        else
+//        	return false;
+	}
+
+
+
+
+	public boolean connect(String address,long TIMEOUT) throws BLException {
+		if (mBluetoothAdapter == null || mBluetoothManager == null
+				|| !mBluetoothAdapter.isEnabled()) {
+			throw new BLException(BLErrCode.BLE_INIT_ERR);
+		}
+		// Previously connected device.  Try to reconnect.
+		if (mBluetoothDeviceAddress != null && address.equals(mBluetoothDeviceAddress)
+				&& mBluetoothGatt != null) {
+			OwnLog.d(TAG, "Trying to use an existing mBluetoothGatt for connection.");
+			if (mBluetoothGatt.connect()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		address = address.toUpperCase();
+		final BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+		if (device == null) {
+			throw new BLException(BLErrCode.BLE_CONNECT_ERR);
+		}
+		OwnLog.i(TAG, "..........................connect......................");
+		// We want to directly connect to the device, so we are setting the autoConnect
+		// parameter to false.
+		mBluetoothGatt = device.connectGatt(mContext, false, mGattCallback);
+		mBluetoothDeviceAddress = address;
+		synchronized (BLEWapper.class) {
+			try {
+				OwnLog.e(TAG, "...................waiting.........................");
+				BLEWapper.class.wait(TIMEOUT);
+				OwnLog.e(TAG, "...................waiting执行完毕了.........................");
+			} catch (InterruptedException e) {
+				OwnLog.e(TAG, "................InterruptedException................");
+				e.printStackTrace();
+			}
+		}
+		return isConnected;
+//        if(mBluetoothGatt != null)
+//            return true;
+//        else
+//        	return false;
 	}
 
 	/**
